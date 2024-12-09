@@ -1,0 +1,18 @@
+{
+  "grid_name": "isr.txt",
+  "named_goals": {
+    "L": [2, 0],
+    "TR": [3, 3],
+    "BR": [0, 3]
+  },
+  "named_starts": {
+    "TR": [8, 7]
+  },
+  "max_episode_steps": 15000,
+  "rewards": {
+    "desirable": 200,
+    "undesirable": -200,
+    "step": -0.01,
+    "r_min": -400
+  }
+}

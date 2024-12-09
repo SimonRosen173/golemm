@@ -1,0 +1,29 @@
+#PBS -l walltime={wall_time}
+#PBS -l select=1:ncpus={n_cpus}:mpiprocs=1
+#PBS -P CSCI1340
+#PBS -q {partition}
+#PBS -M 1391995@students.wits.ac.za
+#PBS -V
+#PBS -e /mnt/lustre/users/srosen/{qsubs_logs_folder}/qsub_{job_name}_$PBS_JOBID.err
+#PBS -o /mnt/lustre/users/srosen/{qsubs_logs_folder}/qsub_{job_name}_$PBS_JOBID.out
+#PBS -N {job_name}
+
+cd /mnt/lustre/users/srosen/zero-shot-comp-marl/mzeroshot
+
+echo "Started"
+
+module load chpc/python/anaconda/3-2019.10
+conda activate /mnt/lustre/users/srosen/marl
+
+# Log wandb to local node directory
+rm -rf /tmp/sr_run
+mkdir /tmp/sr_run -p
+export WANDB_DIR=/tmp/sr_run
+
+{run_commands}
+wait
+
+# Move wandb files to local dir
+echo "Moving wandb logs"
+rm -rf {wandb_folder}
+mv {wandb_folder} -f

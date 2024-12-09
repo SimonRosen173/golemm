@@ -1,0 +1,90 @@
+{
+  "n_agents": 2,
+  "env_config_name": "warehouse.config",
+  "is_env_config_magw": false,
+  "learners": ["improved_golearning", "golearning"],
+  "hyperparams_static": {
+    "common": {
+      "is_decaying_eps": false,
+      "eps": 0.5,
+      "policy_name": "e_greedy",
+      "max_eval_steps": 100,
+      "eval_convg_freq": 100
+    },
+    "qlearning": {},
+    "golearning": {
+      "pre_init_goal_library": false
+    },
+    "improved_golearning": {
+      "pre_init_goal_library": false
+    }
+  },
+  "hyperparams_multi": {
+    "common": {},
+    "qlearning": {},
+    "golearning": {},
+    "improved_golearning": {}
+  },
+  "max_episodes": 1000000,
+  "eval_freq": 1000000,
+  "no_goals": [
+    2, 4, 6, 8, 10, 12, 14, 16
+  ],
+  "named_desirable_joint_goals": [
+    "all", "all", "all", "all", "all", "all", "all", "all"
+  ],
+  "named_eval_starts": [["T_1","B_1"], ["B_1", "T_1"]],
+  "repeats_per_run": 32,
+  "logger_kwargs": {
+  },
+  "learner": {
+    "learners": ["learner1"],
+    "hyperparams": {
+      "act_args": {
+        "common": {
+
+        },
+        "learner1": {
+
+        }
+      },
+      "pre_proc": {
+        "common": {
+
+        },
+        "learner1": {
+
+        }
+      }
+    }
+  },
+  "env": {
+    "config": "4x4.json",
+    "n_agents": 2,
+    "env_args": {
+
+    }
+  },
+  "logger": {
+    "args": {
+      "using_wandb": true,
+      "wandb_mode": "offline",
+      "is_saving_q": true,
+      "save_q_interval": 1000000,
+      "is_saving_video": false,
+      "group": "debug",
+      "notes": "...",
+      "job_type": "train_eval"
+    }
+  },
+  "cluster": {
+    "partition": "stampede",
+    "max_nodes": 20,
+    "runs_per_node": 32,
+    "job_name": "test",
+    "runs_folder": "runs",
+    "slurm_folder": "slurms",
+    "seq_repeats_per_run": 1,
+    "par_repeats_per_run": 32
+  }
+}
